@@ -11,7 +11,7 @@ created_at = Annotated[datetime.datetime, mapped_column(
     server_default=text("TIMEZONE('utc', now())"))]
 updated_at = Annotated[datetime.datetime, mapped_column(
     server_default=text("TIMEZONE('utc', now())"),
-    onupdate=datetime.datetime.utcnow,
+    onupdate=datetime.datetime.utcnow
 )]
 
 
@@ -21,7 +21,7 @@ class Object(Base):
     id: Mapped[intpk]
     name: Mapped[str]
 
-    category: Mapped[int] = mapped_column(ForeignKey("category.id", ondelete="CASCADE"))
+    category: Mapped[int] = mapped_column(ForeignKey("category.id", ondelete="CASCADE", nullable=True))
 
     tags: Mapped[list["TagObject"]] = relationship(
         back_populates="objects",
@@ -37,9 +37,10 @@ class CategoryObject(Base):
     id: Mapped[intpk]
     name: Mapped[str]
 
-    objects: Mapped[list["Object"]] = relationship(
-        back_populates="objects",
-    )
+    # objects: Mapped[list["Object"]] = relationship(
+    #     back_populates="objects",
+    # )
+
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
 
@@ -50,8 +51,8 @@ class TagObject(Base):
     id: Mapped[intpk]
     name: Mapped[str]
 
-    objects: Mapped[list["Object"]] = relationship(
-        back_populates="objects",
-    )
+    # objects: Mapped[list["Object"]] = relationship(
+    #     back_populates="objects",
+    # )
     created_at: Mapped[created_at]
     updated_at: Mapped[updated_at]
