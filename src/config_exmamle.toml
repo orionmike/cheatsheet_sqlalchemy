@@ -7,3 +7,7 @@ port = 5432
 db_name = 'db_name'
 db_user = 'db_user'
 db_password = 'db_password'
+
+[db_sqlite]
+db_dir ='db'
+db_file = 'db.sqlite3'

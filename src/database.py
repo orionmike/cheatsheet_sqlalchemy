@@ -16,5 +16,15 @@ class Base(DeclarativeBase):
     pass
 
 
+def recreate_all_table() -> None:
+    sync_engine.echo = False
+    try:
+        Base.metadata.drop_all(sync_engine)
+    except:
+        pass
+    Base.metadata.create_all(sync_engine)
+    sync_engine.echo = True
+
+
 if __name__ == '__main__':
     Base.metadata.create_all(sync_engine)

@@ -50,6 +50,14 @@ try:
         database=config['db']['db_name']
     )
 
+    # sqlite
+
+    # engine = create_engine("sqlite://") in memory
+
+    URL_SQLITE = URL.create(
+        f"sqlite:////{ABS_PATH}/{config['db_sqlite']['db_dir']}/{config['db_sqlite']['db_file']}"
+    )
+
     print(f'{datetime.now()} start app: {APP_NAME}')
     # print(f'{IND} python {sys.version_info.major}.{sys.version_info.minor}')
     # print(f'{IND} config loaded: OK')
