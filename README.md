@@ -1,3 +1,3 @@
 # SQLAlchemy cheatsheet
 
-- database engine: psotgreSQL
+- database engine: psotgreSQL or sqlite

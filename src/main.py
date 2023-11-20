@@ -1,6 +1,4 @@
 
-from query.orm import *
-
 
 def main() -> None:
     pass

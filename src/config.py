@@ -5,7 +5,6 @@ from sqlalchemy.engine import URL
 from pathlib import Path
 
 
-# ABS_PATH = ''  # for win
 # ABS_PATH = f'{sys.path[0]}/app/'  # for linux
 
 ABS_PATH = Path(__file__).parent.resolve()
@@ -54,13 +53,13 @@ try:
 
     # engine = create_engine("sqlite://") in memory
 
-    URL_SQLITE = URL.create(
-        f"sqlite:////{ABS_PATH}/{config['db_sqlite']['db_dir']}/{config['db_sqlite']['db_file']}"
-    )
+    DB_FILE = Path(f"{ABS_PATH}/{config['db_sqlite']['db_dir']}/{config['db_sqlite']['db_file']}")
+    # URL_SQLITE = URL.create(f"sqlite:////{DB_FILE}")
 
     print(f'{datetime.now()} start app: {APP_NAME}')
-    # print(f'{IND} python {sys.version_info.major}.{sys.version_info.minor}')
-    # print(f'{IND} config loaded: OK')
+    print(f'{IND} python {sys.version_info.major}.{sys.version_info.minor}')
+    print(f'{IND} config loaded: OK')
+    print()
 
 except Exception as e:
     raise Exception(f'config load -> error: {e}')

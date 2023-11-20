@@ -12,19 +12,26 @@ sync_engine = create_engine(URL_OBJECT_SYNC)
 sync_session_maker = sessionmaker(sync_engine, expire_on_commit=False)
 
 
+print(DB_FILE)
+
+file_engine = create_engine(f"sqlite:////{DB_FILE}")
+file_session_maker = sessionmaker(file_engine)
+
+
 class Base(DeclarativeBase):
     pass
 
 
-def recreate_all_table() -> None:
+def recreate_all_table(engine) -> None:
     sync_engine.echo = False
     try:
-        Base.metadata.drop_all(sync_engine)
+        Base.metadata.drop_all(engine)
     except:
         pass
-    Base.metadata.create_all(sync_engine)
+    Base.metadata.create_all(engine)
     sync_engine.echo = True
 
 
 if __name__ == '__main__':
-    Base.metadata.create_all(sync_engine)
+    print(DB_FILE)
+    Base.metadata.create_all(file_engine)

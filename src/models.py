@@ -1,5 +1,5 @@
 import datetime
-from typing import Annotated, Optional
+from typing import Annotated, List, Optional
 
 from sqlalchemy import ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -21,10 +21,14 @@ class Object(Base):
     id: Mapped[intpk]
     name: Mapped[str]
 
-    category: Mapped[int] = mapped_column(ForeignKey("category.id", ondelete="CASCADE", nullable=True))
+    category_id: Mapped[int] = mapped_column(ForeignKey("category.id", ondelete="CASCADE"))
 
-    tags: Mapped[list["TagObject"]] = relationship(
-        back_populates="objects",
+    category: Mapped["CategoryObject"] = relationship(
+        back_populates="object",
+    )
+
+    tags: Mapped[List["TagObject"]] = relationship(
+        back_populates="object",
     )
 
     created_at: Mapped[created_at]
